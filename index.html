@@ -13,22 +13,7 @@
       background: #140a1e; /* nền tím đen */
       color: #e6e6fa; /* chữ sáng tím nhạt */
     }
-    header { 
-      background: #3c0066; /* tím đậm */
-      color: #b8ffff; /* chữ xanh ngọc sáng */
-      padding: 20px; 
-      text-align: center; 
-    }
-    nav a { 
-      color: #ccffcc; /* xanh mint */
-      margin: 0 15px; 
-      text-decoration: none; 
-      font-weight: bold; 
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #ff80ff; /* hồng dạ quang khi hover */
-    }
+   
      /* HERO */
   .hero {
     position : relative;
@@ -71,6 +56,34 @@
   .hero button:hover {
     background: #ff33aa;
   }
+ /* HEADER nằm trong hero */
+  header {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(20,10,30,0.4); /* nền mờ */
+    backdrop-filter: blur(6px);     /* hiệu ứng kính mờ */
+    z-index: 2;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #b8ffff;
+  }
+  nav a { 
+    color: #ccffcc;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #ff80ff;
+  }
 
     section { 
       padding: 40px; 
@@ -86,20 +99,24 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Xin chào 🐳 Đây là web tập tành của Jhin</h1>
-    <nav>
-      <a href="#">Trang chủ</a>
-      <a href="#">Giới thiệu</a>
-      <a href="#">Dịch vụ</a>
-      <a href="#">Liên hệ</a>
-    </nav>
-  </header>
- <!-- HERO SECTION -->
+  <!-- HERO SECTION -->
   <section class="hero">
+    <!-- header trong hero -->
+    <header>
+      <h1>Xin chào 🐳 Đây là web tập tành của Jhin</h1>
+      <nav>
+        <a href="#">Trang chủ</a>
+        <a href="#">Giới thiệu</a>
+        <a href="#">Dịch vụ</a>
+        <a href="#">Liên hệ</a>
+      </nav>
+    </header>
+
+  <!-- nội dung hero -->
     <div class="hero-content">
     </div>
   </section>
+  
   <section>
     <h2>Welcome To My Website</h2>
   </section>
