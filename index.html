@@ -14,128 +14,95 @@
       color: #e6e6fa; /* chữ sáng tím nhạt */
     }
    
-     /* HERO  background*/
-  .hero {
-    position : relative;
-    background : url('WH40K.jpg') no-repeat center/cover;  /* đổi 'diablo.jpg' thành tên ảnh của cậu */
-    min-height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-  }
-     .hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5); /* lớp mờ để chữ dễ đọc */
-  }
-  .hero-content {
-    position: relative;
-    z-index: 1;
-  }
-  .hero h2 {
-    font-size: 2.5rem;
-    margin: 0;
-  }
-  .hero p {
-    font-size: 1.2rem;
-    margin: 10px 0 20px;
-  }
-  .hero button {
-    background: #ff0066; 
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .hero button:hover {
-    background: #ff33aa;
-  }
- /* HEADER nằm trong hero */
-  header {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-   text-align:center.
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background: rgba(20,10,30,0.4); /* nền mờ */
-    backdrop-filter: blur(6px);     /* hiệu ứng kính mờ */
-    z-index: 2;
-  }
-  header h1 {
-    margin-left: 0;
-    position: absolute;
-    top:  4px;
-    left: 0;
-    font-size: 1.4rem;
-    color: #b8ffff;
-  }
-  /* Đặt cả cụm (logo, menu, search) bên dưới câu chào */
-.navbar{
-  display:flex;
-  flex-direction:column;        /* xếp dọc: logo → menu → search */
-  align-items:center;
-  gap:12px;
-  padding:14px 28px;
-  background:rgba(20,10,30,.45);
-  backdrop-filter:blur(6px);
+  /* HEADER nằm trong hero */
+header {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;      /* logo -> menu -> search */
+  align-items: center;
+  gap: 12px;
+  padding: 20px 40px;
+  background: rgba(20,10,30,0.4);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+  text-align: center;
 }
 
-/* Menu: nằm ngang, căn giữa, cách đều */
-.menu ul{
-  list-style:none;
-  display:flex; align-items:center; justify-content:center;
-  gap:40px;                      /* khoảng cách giữa các mục */
-  margin:0; padding:0;
+/* Logo */
+header .logo h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #b8ffff;
 }
 
-.menu a{
-  position:relative;
-  display:inline-block;
-  padding:8px 0;
-  font-weight:700;
-  text-decoration:none;
-  color:#ccffcc;
-  transition:color .25s ease;
+/* MENU ngang – căn giữa – cách đều */
+.menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
 }
-.menu a:hover{ color:#ff80ff; }
 
-/* gạch chân neon khi hover/active */
-.menu a::after{
-  content:"";
-  position:absolute; left:0; bottom:-4px;
-  height:2px; width:0;
-  background:#ff80ff;
-  transition:width .25s ease;
+.menu a {
+  position: relative;
+  text-decoration: none;
+  font-weight: bold;
+  color: #ccffcc;
+  padding: 8px 0;
+  transition: color 0.3s;
+}
+.menu a:hover { color: #ff80ff; }
+
+/* hiệu ứng gạch chân neon */
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  height: 2px; width: 0;
+  background: #ff80ff;
+  transition: width 0.3s;
 }
 .menu a:hover::after,
-.menu a.active::after{ width:100%; }
+.menu a.active::after {
+  width: 100%;
+}
 
+/* SEARCH box */
+.search {
+  display: flex;
+  gap: 8px;
+}
+.srch {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #7749a8;
+  background: rgba(255,255,255,0.1);
+  color: #e6e6fa;
+}
+.srch::placeholder { color: #c9bce6; }
+.btn {
+  background: #ff0066;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover { background: #ff33aa; }
 
-    section { 
-      padding: 40px; 
-      text-align: center; 
-      color: #e0ccff; /* tím sáng hơn cho section */
-    }
-    footer { 
-      background: #2a173d; /* tím than */
-      color: #aaaaff; /* xanh lam nhạt */
-      padding: 20px; 
-      text-align: center; 
-    }
   </style>
 </head>
+
+  
 <body>
- <div class="navbar">
-  <div class="icon">
-    <h2 class="logo">Xin chào 🚀 Đây là web tập tành của Jhin</h2>
+<header class="header">
+  <div class="logo">
+    <h1>Xin chào 🚀 Đây là web tập tành của Jhin</h1>
   </div>
 
   <div class="menu">
@@ -152,8 +119,7 @@
     <input class="srch" type="search" placeholder="Type To text">
     <button class="btn">Search</button>
   </div>
-</div>
-
+</header>
   <!-- nội dung hero -->
     <div class="hero-content">
     </div>
