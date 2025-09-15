@@ -4,6 +4,35 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="shortcut icon" href="favicon.png" type="image/png">
   <meta charset="UTF-8">
+  <style>
+  /* ... phần CSS hiện có ... */
+
+  .hero{
+    position:relative;
+    min-height:600px;
+    background:url('WH40K.jpg') center/cover no-repeat;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; text-align:center;
+  }
+  .hero::before{ content:""; position:absolute; inset:0; background:rgba(0,0,0,.5); }
+  .hero-content{ position:relative; z-index:1; }
+</style>
+...
+<body>
+  <section class="hero">
+    <header class="header"> <!-- nguyên block header của cậu -->
+      <!-- ... logo, menu, search ... -->
+    </header>
+    <div class="hero-content"></div>
+  </section>
+
+  <section>
+    <h2>Welcome To My Website</h2>
+  </section>
+
+  <footer>~ J4F ~ ---- Văn Thịnh</footer>
+</body>
+
   <title>Van Thinh Website</title>
   <style>
     body { 
@@ -100,6 +129,8 @@ header .logo h1 {
 
   
 <body>
+...
+<body>
 <header class="header">
   <div class="logo">
     <h1>Xin chào 🚀 Đây là web tập tành của Jhin</h1>
@@ -120,17 +151,14 @@ header .logo h1 {
     <button class="btn">Search</button>
   </div>
 </header>
-  <!-- nội dung hero -->
-    <div class="hero-content">
-    </div>
-  </section>
-  
-  <section>
-    <h2>Welcome To My Website</h2>
-  </section>
 
-  <footer>
-    ~ J4F ~ ---- Văn Thịnh
-  </footer>
+<section>
+  <h2>Welcome To My Website</h2>
+</section>
+
+<footer>
+  ~ J4F ~ ---- Văn Thịnh
+</footer>
 </body>
 </html>
+
