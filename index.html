@@ -77,22 +77,47 @@
     font-size: 1.4rem;
     color: #b8ffff;
   }
-     /* NAV MENU căn giữa, cách đều */
-  nav {
-    display: flex;
-    justify-content: center; /* căn giữa */
-    gap: 40px; /* khoảng cách đều giữa các mục */
-  }
-  nav a { 
-    color: #ccffcc;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  nav a:hover {
-    color: #ff80ff;
-  }
+  /* Đặt cả cụm (logo, menu, search) bên dưới câu chào */
+.navbar{
+  display:flex;
+  flex-direction:column;        /* xếp dọc: logo → menu → search */
+  align-items:center;
+  gap:12px;
+  padding:14px 28px;
+  background:rgba(20,10,30,.45);
+  backdrop-filter:blur(6px);
+}
+
+/* Menu: nằm ngang, căn giữa, cách đều */
+.menu ul{
+  list-style:none;
+  display:flex; align-items:center; justify-content:center;
+  gap:40px;                      /* khoảng cách giữa các mục */
+  margin:0; padding:0;
+}
+
+.menu a{
+  position:relative;
+  display:inline-block;
+  padding:8px 0;
+  font-weight:700;
+  text-decoration:none;
+  color:#ccffcc;
+  transition:color .25s ease;
+}
+.menu a:hover{ color:#ff80ff; }
+
+/* gạch chân neon khi hover/active */
+.menu a::after{
+  content:"";
+  position:absolute; left:0; bottom:-4px;
+  height:2px; width:0;
+  background:#ff80ff;
+  transition:width .25s ease;
+}
+.menu a:hover::after,
+.menu a.active::after{ width:100%; }
+
 
     section { 
       padding: 40px; 
@@ -108,22 +133,26 @@
   </style>
 </head>
 <body>
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <!-- header trong hero -->
- <header class="header">
-  <div class="logo">
-    <h1>Xin chào 🚀 Đây là web tập tành của Jhin</h1>
+ <div class="navbar">
+  <div class="icon">
+    <h2 class="logo">Xin chào 🚀 Đây là web tập tành của Jhin</h2>
   </div>
-  <nav class="navbar">
+
+  <div class="menu">
     <ul>
-      <li><a href="#">Trang chủ</a></li>
-      <li><a href="#">Giới thiệu</a></li>
-      <li><a href="#">Dịch vụ</a></li>
-      <li><a href="#">Liên hệ</a></li>
+      <li><a class="active" href="#">HOME</a></li>
+      <li><a href="#">ABOUT</a></li>
+      <li><a href="#">SERVICE</a></li>
+      <li><a href="#">DESIGN</a></li>
+      <li><a href="#">CONTACT</a></li>
     </ul>
-  </nav>
-</header>
+  </div>
+
+  <div class="search">
+    <input class="srch" type="search" placeholder="Type To text">
+    <button class="btn">Search</button>
+  </div>
+</div>
 
   <!-- nội dung hero -->
     <div class="hero-content">
