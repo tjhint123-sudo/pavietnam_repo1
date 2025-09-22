@@ -1,151 +1,221 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<link rel="icon" href="favicon.png" type="image/png">
-<link rel="shortcut icon" href="favicon.png" type="image/png">
-  <meta charset="UTF-8">
-  <style>
-  /* ... phần CSS hiện có ... */
+  <meta charset="UTF-8" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="shortcut icon" href="favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jhin – Cyber Header + Hero</title>
 
-  .hero{
-    position:relative;
-    min-height:600px;
-    background:url('WH40K.jpg') center/cover no-repeat;
-    display:flex; align-items:center; justify-content:center;
-    color:#fff; text-align:center;
-  }
-  .hero::before{ content:""; position:absolute; inset:0; background:rgba(0,0,0,.5); }
-  .hero-content{ position:relative; z-index:1; }
-</style>
-...
-<body>
-  <section class="hero">
-    <header class="header"> <!-- nguyên block header của cậu -->
-      <!-- ... logo, menu, search ... -->
-    </header>
-    <div class="hero-content"></div>
-  </section>
-  <title>Van Thinh Website</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      margin: 0; 
-      padding: 0; 
-      background: #140a1e; /* nền tím đen */
-      color: #e6e6fa; /* chữ sáng tím nhạt */
+    :root{
+      --cy: #00ffff;   /* cyan neon */
+      --pu: #8a2be2;   /* tím neon */
+      --bg: #000000;   /* nền chung */
+      --overlay: rgba(0,0,0,.55);
     }
-   
-  /* HEADER nằm trong hero */
-header {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;      /* logo -> menu -> search */
-  align-items: center;
-  gap: 12px;
-  padding: 20px 40px;
-  background: rgba(20,10,30,0.4);
-  backdrop-filter: blur(6px);
-  z-index: 2;
-  text-align: center;
-}
+    /* reset nhẹ */
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{ margin:0; background:var(--bg); color:#fff; font-family:system-ui, Arial, sans-serif; }
 
-/* Logo */
-header .logo h1 {
-  margin: 0;
-  font-size: 1.4rem;
-  color: #b8ffff;
-}
+    /* ===== HERO WRAPPER (có cả topbar) ===== */
+    .WK{
+      position:relative;
+      min-height:100vh;
+      background:url("WH40K.jpg") center/cover no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    /* overlay tối toàn màn */
+    .WK::after{
+      content:"";
+      position:absolute; inset:0;
+      background:var(--overlay);
+      z-index:1;
+    }
 
-/* MENU ngang – căn giữa – cách đều */
-.menu ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin: 0;
-  padding: 0;
-}
+    /* ===== TOPBAR (nằm trong .WK) ===== */
+    .topbar{
+      position:absolute; top:0; left:0; right:0;
+      height:80px;
+      display:flex; align-items:center;
+      z-index:3; /* trên overlay và dưới nội dung nếu cần thì tăng thêm */
+      background:linear-gradient(90deg, var(--cy), var(--pu));
+      box-shadow:0 2px 16px rgba(0,0,0,.7);
+      padding:0 16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.3px;
+      text-shadow:0 0 10px var(--cy), 0 0 18px var(--pu);
+      white-space:nowrap;
+    }
+    .brand .dot{ width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 0 10px #fff; }
+    .spacer{ flex:1; }
 
-.menu a {
-  position: relative;
-  text-decoration: none;
-  font-weight: bold;
-  color: #ccffcc;
-  padding: 8px 0;
-  transition: color 0.3s;
-}
-.menu a:hover { color: #ff80ff; }
+    /* nav */
+    nav ul{
+      display:flex; align-items:center; gap:18px;
+      list-style:none; margin:0; padding:0;
+    }
+    nav a{
+      display:inline-block; padding:10px 8px;
+      color:#fff; text-decoration:none; font-weight:600;
+      position:relative;
+    }
+    /* gạch neon dưới link */
+    nav a::after{
+      content:""; position:absolute; left:8px; right:8px; bottom:6px;
+      height:2px; transform:scaleX(0);
+      background:linear-gradient(90deg, var(--cy), var(--pu));
+      box-shadow:0 0 8px var(--cy), 0 0 12px var(--pu);
+      transition:transform .25s ease;
+      transform-origin:left;
+    }
+    nav a:hover::after{ transform:scaleX(1); }
 
-/* hiệu ứng gạch chân neon */
-.menu a::after {
-  content: "";
-  position: absolute;
-  left: 0; bottom: -4px;
-  height: 2px; width: 0;
-  background: #ff80ff;
-  transition: width 0.3s;
-}
-.menu a:hover::after,
-.menu a.active::after {
-  width: 100%;
-}
+    /* nút hamburger cho mobile */
+    .hamburger{
+      display:none;
+      border:1px solid rgba(255,255,255,.3);
+      background:transparent; color:#fff;
+      padding:8px 10px; border-radius:8px;
+      cursor:pointer; font-size:14px;
+    }
 
-/* SEARCH box */
-.search {
-  display: flex;
-  gap: 8px;
-}
-.srch {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #7749a8;
-  background: rgba(255,255,255,0.1);
-  color: #e6e6fa;
-}
-.srch::placeholder { color: #c9bce6; }
-.btn {
-  background: #ff0066;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.btn:hover { background: #ff33aa; }
+    /* menu mobile panel */
+    .menu-panel{
+      position:absolute; top:80px; left:0; right:0;
+      background:rgba(10,10,25,.9);
+      backdrop-filter: blur(4px);
+      border-bottom:1px solid rgba(255,255,255,.15);
+      display:none;
+      z-index:3;
+    }
+    .menu-panel ul{
+      list-style:none; margin:0; padding:10px;
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .menu-panel a{
+      display:block; padding:12px 16px; text-align:left;
+      color:#fff; text-decoration:none; font-weight:600;
+      border-radius:8px;
+    }
+    .menu-panel a:hover{
+      background:linear-gradient(90deg, rgba(0,255,255,.15), rgba(138,43,226,.15));
+    }
 
+    /* ===== NỘI DUNG HERO ===== */
+    .WK-content{
+      position:relative; z-index:2; /* dưới topbar (3) để topbar luôn phủ trên */
+      margin-top:100px; /* đẩy nội dung xuống dưới thanh 80px + 1 chút khoảng */
+      padding:24px;
+      max-width:960px;
+    }
+    .WK h1{
+      font-size:clamp(28px, 5vw, 44px);
+      line-height:1.2;
+      margin:0 0 12px;
+      text-shadow:0 0 10px var(--cy), 0 0 20px var(--pu);
+    }
+    .WK p{
+      margin:0 auto; max-width:720px; opacity:.92;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px){
+      nav ul{ display:none; }         /* ẩn menu desktop */
+      .hamburger{ display:inline-block; } /* hiện nút */
+    }
+    /* trạng thái mở menu mobile */
+    .menu-open nav ul{ display:flex; flex-direction:column; } /* dự phòng nếu cần */
+    .menu-open .menu-panel{ display:block; }
   </style>
 </head>
-
-  
 <body>
-...
-<body>
-<header class="header">
-  <div class="logo">
-    <h1>Xin chào 🐳 Đây là web tập tành của Jhin</h1>
+
+  <div class="WK">
+    <!-- TOPBAR gộp trong WK -->
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Jhin Cyber</span>
+      </div>
+
+      <div class="spacer"></div>
+
+      <!-- menu desktop -->
+      <nav aria-label="Chính">
+        <ul>
+          <li><a href="#home">Trang chủ</a></li>
+          <li><a href="#about">Giới thiệu</a></li>
+          <li><a href="#gallery">Bộ sưu tập</a></li>
+          <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+      </nav>
+
+      <!-- nút hamburger (mobile) -->
+      <button class="hamburger" id="menuBtn" aria-expanded="false" aria-controls="menuPanel">
+        ☰ Menu
+      </button>
+
+      <!-- panel menu mobile -->
+      <div class="menu-panel" id="menuPanel">
+        <ul>
+          <li><a href="#home"   onclick="closeMenu()">Trang chủ</a></li>
+          <li><a href="#about"  onclick="closeMenu()">Giới thiệu</a></li>
+          <li><a href="#gallery"onclick="closeMenu()">Bộ sưu tập</a></li>
+          <li><a href="#contact"onclick="closeMenu()">Liên hệ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HERO CONTENT -->
+    <div class="WK-content" id="home">
+      <h1>Xin chào 🐳 Đây là web tập tành của Jhin</h1>
+      <p>Cyber vibe xanh–tím: topbar gradient, hiệu ứng neon, overlay ảnh nền WH40K.</p>
+    </div>
   </div>
 
-  <div class="menu">
-    <ul>
-      <li><a class="active" href="#">HOME</a></li>
-      <li><a href="#">ABOUT</a></li>
-      <li><a href="#">SERVICE</a></li>
-      <li><a href="#">DESIGN</a></li>
-      <li><a href="#">CONTACT</a></li>
-    </ul>
-  </div>
+  <!-- vài section mô phỏng điều hướng -->
+  <section id="about" style="padding:64px 16px; max-width:960px; margin:0 auto; color:#ddd;">
+    <h2>Giới thiệu</h2>
+    <p>Đây là khu vực nội dung tiếp theo để thử điều hướng menu.</p>
+  </section>
 
-  <div class="search">
-    <input class="srch" type="search" placeholder="Type To text">
-    <button class="btn">Search</button>
-  </div>
-</header>
-<footer>
-  ~ J4F ~ ---- Văn Thịnh
-</footer>
+  <section id="gallery" style="padding:64px 16px; max-width:960px; margin:0 auto; color:#ddd;">
+    <h2>Bộ sưu tập</h2>
+    <p>Thêm ảnh, thẻ, hoặc grid ở đây.</p>
+  </section>
+
+  <section id="contact" style="padding:64px 16px; max-width:960px; margin:0 auto; color:#ddd;">
+    <h2>Liên hệ</h2>
+    <p>Email: you@example.com – hoặc form liên hệ.</p>
+  </section>
+
+  <script>
+    const btn = document.getElementById('menuBtn');
+    const panel = document.getElementById('menuPanel');
+
+    function toggleMenu(){
+      const open = panel.style.display === 'block';
+      panel.style.display = open ? 'none' : 'block';
+      btn.setAttribute('aria-expanded', String(!open));
+    }
+    function closeMenu(){
+      panel.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', toggleMenu);
+    // đóng menu khi click ra ngoài
+    document.addEventListener('click', (e)=>{
+      if (!panel.contains(e.target) && e.target !== btn){
+        closeMenu();
+      }
+    });
+  </script>
 </body>
 </html>
-
