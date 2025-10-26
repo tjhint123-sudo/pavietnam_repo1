@@ -52,7 +52,7 @@ nav{
 	list-style:none;
 	background-color: #2e0060;
 	padding: 15px 0px;
-	border: 0.1px solid black;
+	border: 0.1px solid green;
 	display:none;
 }
 #menu li:hover ul.dropdown-menu {
@@ -127,7 +127,7 @@ nav{
 	border-bottom: 0.1px solid white;
 }
 #main ul.menu-con li:hover a{
-	border-bottom: 1px solid violet;
+	border-bottom: 1px solid green;
 }
 #main ul.menu-con li:last-child a{
 	border:none;
@@ -216,4 +216,5 @@ footer{
 	color: violet;
 	background-color:blue;
 }
+
 
