@@ -64,7 +64,7 @@ nav{
 	border-bottom: 0.1px solid white;
 }
 #menu ul.dropdown-menu li:hover a{
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid violet;
 }
 #menu ul.dropdown-menu li:last-child a{
 	border:none;
@@ -127,7 +127,7 @@ nav{
 	border-bottom: 0.1px solid white;
 }
 #main ul.menu-con li:hover a{
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid violet;
 }
 #main ul.menu-con li:last-child a{
 	border:none;
@@ -216,3 +216,4 @@ footer{
 	color: violet;
 	background-color:blue;
 }
+
