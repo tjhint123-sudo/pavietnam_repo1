@@ -210,3 +210,9 @@ section img{
 .table img:hover {
 	transform: scale(1.05);
 }
+
+footer{
+	text-align:center;
+	color: violet;
+	background-color:blue;
+}
