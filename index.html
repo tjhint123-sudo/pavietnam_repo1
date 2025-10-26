@@ -1,183 +1,97 @@
-<!DOCTYPE html>
-<html lang="vi"> <!-- Khai báo HTML và ngôn ngữ tiếng Việt -->
-<head>
-  <meta charset="UTF-8"> <!-- Hỗ trợ ký tự Unicode (tiếng Việt, emoji) -->
-  
-  <!-- favicon hiển thị trên tab trình duyệt -->
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="shortcut icon" href="favicon.png" type="image/png">
-  
-  <!-- Giúp web hiển thị tốt trên mobile (responsive) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Thịnh Cyber</title>
-  <style>
-    html { scroll-behavior: smooth; } /* bấm menu là cuộn mượt */
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<meta name="viewport" content="width=device-width , initial-scale=1.0">
+		<link rel="stylesheet" href="css/design.css">
+		<title>>🎮 Game Store</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<nav class="container">
+					<a href="#" id="logo">
+						<img src="pic/icon.png" alt="Game Store">
+					</a>
+					<div class="search">
+						<input type="text" placeholder="Searching">
+ 					</div>
+					
+					<ul id="menu">
+						<li><a href="#">Settings</a></li>
+					    <li><a href="#">View</a></li>
+						<li><a href="#">Games 🎮</a></li>
+						<li><a href="#">Notifications 🔔▼</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">News</a></li>
+								<li><a href="#">Sell</a></li>
+								<li><a href="#">Community</a></li>
+								<li><a href="#">Uploaded</a></li>
+								<li><a href="#">Download</a></li>
+							</ul>
+						</li> 
+						<li><a href="#">Support</a></li>					
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+	<div id="main">
+		<div class="Category">
+			<ul class="Category-select">
+				<li><a href="#" target="_blank">🏠Home</a></li>
+				<li><a href="#">Category⯈</a>
+					<ul class="menu-con">
+						<li><a href="#">MMO</a>
+						<li><a href="#">FPS</a></li>
+						<li><a href="#">Psychological</a></li>	
+						<li><a href="#">RPG</a></li>
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Visual Novel</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Updated</a></li>
+				<li><a href="#">History</a></li>
+				<li><a href="#">Library</a></li>	
+				<li><a href="#">Download</a></li>
+			</ul>
+		</div> 
 
-    /* Định nghĩa biến màu để dùng nhiều lần */
-    :root {
-      --cy: #00ffff;   /* cyan neon */
-      --pu: #8a2be2;   /* tím neon */
-      --pk: #ff00ff;   /* hồng neon */
-    }
+			<aside>
+				<div class="game-list">
+					<a class="game" href="#" target="_blank" >
+						<img src="pic/tf2.jpg" alt="Team Fortress 2">
+						<img src="pic/cod.jpg" alt="Call of Duty">
+						<img src="pic/ds2.jpg" alt="Dead Stranding">				
+						<img src="pic/t.jpg" alt="The Not Existent">
+						<img src="pic/titan.jpg" alt="Titan Fall">
+						<img src="pic/quao.jpg" alt="Anh Quạo">
+					</a>
+				</div>
+			</aside>
+		</div>
+		
+	<section class="store-sections">
+		<div class="table">
+			<h2>🆕 New & Trending</h2>
+				<div class="game-row">
+				<img src="pic/deo.jpeg" >
+				<img src="pic/hi3.jpeg" >
+				<img src="pic/hh.jpg" >
+				<img src="pic/se.jpeg" >
+		
+			<h2>💰 Top Sellers</h2>
+				<div class="game-row">
+				<img src="pic/deo.jpeg">
+				<img src="pic/top2.jpg">
+				<img src="pic/top3.jpg">
 
-    body {
-      margin: 0;                     /* bỏ khoảng trắng mặc định */
-      background: #000;              /* nền đen cho toàn trang */
-      font-family: system-ui, Arial, sans-serif; /* font chữ chính */
-    }
-
-    /* HERO bao toàn màn hình */
-    .WK {
-      position: relative;            /* để ::after (overlay) bám vào */
-      min-height: 100vh;             /* chiều cao tối thiểu = 100% màn hình */
-      background: url("WH40K.jpg") center/cover no-repeat; /* ảnh nền */
-      display: flex;                 /* flexbox để căn giữa */
-      align-items: center;           /* căn giữa dọc */
-      justify-content: center;       /* căn giữa ngang */
-      text-align: center;            /* chữ căn giữa */
-    }
-
-    /* overlay tối phủ lên ảnh nền */
-    .WK::after {
-      content: "";                   /* bắt buộc cho pseudo-element */
-      position: absolute; inset: 0;  /* phủ toàn bộ cha */
-      background: rgba(0,0,0,.5);    /* màu đen trong suốt */
-      z-index: 1;                    /* nằm trên ảnh, dưới chữ */
-    }
-
-    /* animation chạy gradient ngang */
-    @keyframes cyberWave {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Thanh topbar */
-    .topbar {
-      position: absolute; top: 0; left: 0; right: 0; /* bám trên cùng */
-      height: 80px;                 /* chiều cao topbar */
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px;              /* khoảng cách trái phải */
-      z-index: 3;                   /* cao hơn overlay */
-      background: linear-gradient(90deg, var(--cy), var(--pu), var(--pk), var(--cy)); 
-      background-size: 300% 300%;   /* phóng to gradient để animation mượt */
-      animation: cyberWave 8s ease-in-out infinite; /* áp animation */
-      box-shadow: 0 2px 16px rgba(0,0,0,.7); /* bóng đổ */
-    }
-
-    /* Logo/brand ở góc trái */
-    .brand {
-      display: flex; align-items: center; gap: 10px; /* logo + text */
-      font-weight: 800;              /* chữ đậm */
-      letter-spacing: .3px;          /* giãn chữ nhẹ */
-    }
-    .brand .dot {
-      width: 12px; height: 12px;     /* chấm tròn */
-      border-radius: 50%; 
-      background: #fff;
-      box-shadow: 0 0 10px #fff;     /* hiệu ứng sáng */
-    }
-    /* Chữ Thịnh Cyber màu đen */
-    .brand span:last-child {
-      color: #000 !important;        /* ép chữ thành đen */
-      background: none !important;   /* bỏ gradient chữ */
-      -webkit-background-clip: initial !important;
-      -webkit-text-fill-color: initial !important;
-      animation: none !important;    /* tắt animation chữ */
-      text-shadow: none;             /* không có glow */
-    }
-
-    /* Menu */
-    nav ul {
-      display: flex; gap: 18px;      /* xếp ngang, cách 18px */
-      list-style: none;              /* bỏ chấm đầu dòng */
-      margin: 0; padding: 0;
-    }
-    nav a {
-      color: #fff;                   /* chữ trắng */
-      text-decoration: none;         /* bỏ gạch chân */
-      font-weight: 600;              /* đậm vừa */
-      position: relative;            /* để ::after bám vào */
-      padding: 8px 6px;              /* khoảng cách */
-    }
-    /* Hiệu ứng gạch neon dưới link khi hover */
-    nav a::after {
-      content:""; 
-      position: absolute; left:6px; right:6px; bottom:4px;
-      height:2px; 
-      background: linear-gradient(90deg, var(--cy), var(--pu));
-      box-shadow: 0 0 8px var(--cy), 0 0 12px var(--pu);
-      transform: scaleX(0);          /* ẩn ban đầu */
-      transition: transform .25s ease;
-      transform-origin: left;        /* bung từ trái qua phải */
-    }
-    nav a:hover::after { 
-      transform: scaleX(1);          /* hiện ra khi hover */
-    }
-
-    /* Nội dung chính trong hero */
-    .WK-content {
-      position: relative; 
-      z-index: 2;                    /* trên overlay */
-      margin-top: 120px;             /* đẩy xuống dưới topbar */
-      padding: 20px;
-      max-width: 960px;              /* giới hạn chiều ngang */
-    }
-    .WK-content h1 {
-      font-size: 2.5rem;
-      text-shadow: 0 0 10px var(--cy), 0 0 20px var(--pu); /* neon */
-      margin: 0 0 10px;
-    }
-    .WK-content h2 {
-      margin: 0;
-      opacity: .9;                   /* hơi mờ */
-      text-shadow: 0 0 10px var(--cy), 0 0 20px var(--pu); /* neon */
-      color: #39ff14; 
-    }
-  </style>
-</head>
-
-<body>
-  <div class="WK">
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <!-- Logo + chữ -->
-      <div class="brand">
-        <span class="dot"></span> <!-- chấm tròn -->
-        <span>Thịnh Cyber</span> <!-- chữ đen -->
-      </div>
-
-      <!-- Menu điều hướng -->
-      <nav>
-        <ul>
-          <li><a href="#home">Trang chủ</a></li>
-          <li><a href="#about">Giới thiệu</a></li>
-          <li><a href="#gallery">Mục Tiêu</a></li>
-          <li><a href="#contact">Liên hệ</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- HERO CONTENT -->
-    <div class="WK-content" id="home">
-      <h1>Xin chào 🐳 Đây là web tập tành của Jhin</h1>
-      <h2>~J4F~</h2>
-    </div>
-  </div>
-  <section id="about" style="padding:64px 16px; max-width:960px; margin:0 auto; color:#ddd;background:#008cff;">
-  <h2>Giới thiệu</h2>
-  <p>Hi ! Tớ là Thịnh , là một sinh viên đang theo học tại Trường Đại học Phan Thiết-UPT , mình hiện tại đang theo chuyên ngành Công Nghệ Thông Tin.</p>
-</section>
-
-<section id="gallery" style="padding:64px 16px; max-width:960px; margin:0 auto; color:#ddd;background:#6200ff;">
-  <h2>Mục Tiêu</h2>
-  <p>Ảnh/Thẻ/Grid…</p>
-</section>
-
-<section id="contact" style="padding:64px 16px; max-width:960px; margin:0 auto; color:#ff8800;background:#022a3a;">
-  <h2>Liên hệ</h2>
-  <p>ngovanthinh.k16@stu.upt.edu.vn</p>
-</section>
-
-</body>
+			<h2>🎁 Free & Specials</h2>
+			<div class="game-row">
+			<img src="pic/deo.jpeg">
+			<img src="pic/22.jpg">
+		</div>
+	</section>
+		
+	</body>
 </html>
