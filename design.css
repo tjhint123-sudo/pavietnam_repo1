@@ -216,6 +216,27 @@ footer{
 	color: violet;
 	background-color:blue;
 }
+@media (max-width: 768px){
+  #menu li a{
+    padding: 8px 10px;
+    font-size: 14px;
+}
+  #menu ul.dropdown-menu{
+    position: static;
+    width: 100%;
+    border-radius: 8px;
+}
+  #main{
+    flex-direction: column;
+}
+  aside img{
+    width: 100%;
+    height: auto;
+}
+  section h2{
+    font-size: 28px;
+}
+}
 
 
 
