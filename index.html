@@ -1,98 +1,123 @@
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE-edge">
-		<meta name="viewport" content="width=device-width , initial-scale=1.0">
-		<link rel="stylesheet" href="design.css">
-		<title>>🎮 Game Store</title>
-	</head>
-	<body>
-		<div id="wrapper">
-			<div id="header">
-				<nav class="container">
-					<a href="#" id="logo">
-						<img src="icon.png" alt="Game Store">
-					</a>
-					<div class="search">
-						<input type="text" placeholder="Searching">
- 					</div>
-					
-					<ul id="menu">
-						<li><a href="#">Settings</a></li>
-					    <li><a href="#">View</a></li>
-						<li><a href="#">Games 🎮</a></li>
-						<li><a href="#">Notifications 🔔▼</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">News</a></li>
-								<li><a href="#">Sell</a></li>
-								<li><a href="#">Community</a></li>
-								<li><a href="#">Uploaded</a></li>
-								<li><a href="#">Download</a></li>
-							</ul>
-						</li> 
-						<li><a href="#">Support</a></li>					
-					</ul>
-				</nav>
-			</div>
-		</div>
-		
-	<div id="main">
-		<div class="Category">
-			<ul class="Category-select">
-				<li><a href="#" target="_blank">🏠Home</a></li>
-				<li><a href="#">Category⯈</a>
-					<ul class="menu-con">
-						<li><a href="#">MMO</a>
-						<li><a href="#">FPS</a></li>
-						<li><a href="#">Psychological</a></li>	
-						<li><a href="#">RPG</a></li>
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Visual Novel</a></li>
-					</ul>
-				</li>
-				<li><a href="#">Updated</a></li>
-				<li><a href="#">History</a></li>
-				<li><a href="#">Library</a></li>	
-				<li><a href="#">Download</a></li>
-			</ul>
-		</div> 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Vòng Quay May Mắn (VIP Only)</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; }
+        .wheel-container { margin: 20px auto; position: relative; width: 500px; height: 500px; }
+        canvas { width: 100%; height: 100%; transform: rotate(-90deg); transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1); }
+        #spinBtn {
+            margin-top: 20px; padding: 15px 40px; font-size: 20px; cursor: pointer;
+            background-color: #ff5722; color: white; border: none; border-radius: 5px; font-weight: bold;
+        }
+        #spinBtn:disabled { background-color: #ccc; cursor: not-allowed; }
+        #result { margin-top: 20px; font-size: 24px; font-weight: bold; color: #333; height: 30px;}
+        .arrow {
+            position: absolute; top: 50%; right: -30px; transform: translateY(-50%);
+            width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-right: 30px solid red;
+        }
+    </style>
+</head>
+<body>
 
-			<aside>
-				<div class="game-list">
-					<a class="game" href="#" target="_blank" >
-						<img src="tf2.jpg" alt="Team Fortress 2">
-						<img src="cod.jpg" alt="Call of Duty">
-						<img src="ds2.jpg" alt="Dead Stranding">				
-						<img src="t.jpg" alt="The Not Existent">
-						<img src="titan.jpg" alt="Titan Fall">
-						<img src="quao.jpg" alt="Anh Quạo">
-					</a>
-				</div>
-			</aside>
-		</div>
-		
-	<section class="store-sections">
-		<div class="table">
-			<h2>🆕 New & Trending</h2>
-				<div class="game-row">
-				<img src="deo.jpeg" >
-				<img src="hi3.jpeg" >
-				<img src="hh.jpg" >
-				<img src="se.jpeg" >
-		
-			<h2>💰 Top Sellers</h2>
-				<div class="game-row">
-				<img src="deo.jpeg">
-				<img src="horse.jpg">
-				<img src="sau.jpg">
+    <h1>Vòng Quay May Mắn</h1>
+    <div class="wheel-container">
+        <canvas id="wheel" width="500" height="500"></canvas>
+        <div class="arrow" style="right: -20px; border-right: 40px solid red; border-top: 20px solid transparent; border-bottom: 20px solid transparent;"></div>
+    </div>
+    <div id="result"></div>
+    <button id="spinBtn" onclick="spin()">QUAY NGAY</button>
 
-			<h2>🎁 Free & Specials</h2>
-			<div class="game-row">
-			<img src="deo.jpeg">
-			<img src="wk.jpeg">
-		</div>
-	</section>
-	
-	<footer>Game Store</footer>
-	</body>
+<script>
+    // 1. Danh sách hiển thị trên vòng quay (để làm màu)
+    const allNames = [
+        "Anh", "G bảo", "C Bảo", "Chiến", "Chương", "Đại", "Hiếu", "Hoàng", "Hưng", "Huy",
+        "N Khang", "T Khang", "Khoa", "Lộc", "Q Minh", "T Minh", "Nghĩa", "Nhân", "Phú", "Quỳnh",
+        "Thắng", "Phương", "Thiện", "Thọ", "Tín", "Tình"
+    ];
+
+    // 2. Danh sách 5 người ĐƯỢC CHỌN (Chỉ những người này mới có quà)
+    const targetNames = ["Chiến", "G bảo", "Chương",];
+    
+    // Tạo một danh sách tạm để dùng cho 5 lần quay đầu tiên (để đảm bảo không trùng nhau)
+    let firstBatch = [...targetNames]; 
+
+    const colors = ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9', '#C5CAE9', '#BBDEFB', '#B3E5FC', '#B2EBF2', '#B2DFDB', '#C8E6C9', 
+                    '#DCEDC8', '#F0F4C3', '#FFF9C4', '#FFECB3', '#FFE0B2', '#FFCCBC', '#D7CCC8', '#F5F5F5', '#CFD8DC', '#ff8a80',
+                    '#ff80ab', '#ea80fc', '#b388ff', '#8c9eff', '#82b1ff', '#80d8ff'];
+
+    const canvas = document.getElementById('wheel');
+    const ctx = canvas.getContext('2d');
+    const size = 500;
+    const center = size / 2;
+    const radius = size / 2;
+    const step = 2 * Math.PI / allNames.length;
+    let currentRotation = 0;
+
+    function drawWheel() {
+        for (let i = 0; i < allNames.length; i++) {
+            ctx.beginPath();
+            ctx.moveTo(center, center);
+            ctx.arc(center, center, radius, i * step, (i + 1) * step);
+            ctx.fillStyle = colors[i % colors.length];
+            ctx.fill();
+            ctx.stroke();
+            ctx.save();
+            ctx.translate(center, center);
+            ctx.rotate(i * step + step / 2);
+            ctx.textAlign = "right";
+            ctx.fillStyle = "#000";
+            ctx.font = "bold 14px Arial";
+            ctx.fillText(allNames[i], radius - 10, 5);
+            ctx.restore();
+        }
+    }
+    drawWheel();
+
+    let isSpinning = false;
+
+    function spin() {
+        if (isSpinning) return;
+        isSpinning = true;
+        document.getElementById('spinBtn').disabled = true;
+        document.getElementById('result').innerText = "Đang quay...";
+
+        let selectedName;
+
+        // --- LOGIC GIAN LẬN MỚI ---
+        if (firstBatch.length > 0) {
+            // TRƯỜNG HỢP 1: 5 Lần đầu tiên
+            // Lấy ngẫu nhiên 1 người trong danh sách VIP và XÓA khỏi danh sách tạm
+            // Để đảm bảo 5 lần đầu sẽ ra đủ 5 người này.
+            const idx = Math.floor(Math.random() * firstBatch.length);
+            selectedName = firstBatch[idx];
+            firstBatch.splice(idx, 1);
+        } else {
+            // TRƯỜNG HỢP 2: Từ lần thứ 6 trở đi
+            // Vẫn chỉ lấy ngẫu nhiên trong danh sách gốc targetNames
+            // Các tên khác ngoài danh sách này sẽ không bao giờ được gọi.
+            const idx = Math.floor(Math.random() * targetNames.length);
+            selectedName = targetNames[idx];
+        }
+        // ---------------------------
+
+        const targetIndex = allNames.indexOf(selectedName);
+        const segmentAngle = 360 / allNames.length; 
+        const extraSpins = 360 * 10; 
+        const stopAngle = (360 - (targetIndex * segmentAngle) - (segmentAngle / 2));
+        const totalRotation = currentRotation + extraSpins + stopAngle - (currentRotation % 360);
+
+        canvas.style.transform = `rotate(${totalRotation}deg)`;
+        currentRotation = totalRotation;
+
+        setTimeout(() => {
+            isSpinning = false;
+            document.getElementById('spinBtn').disabled = false;
+            document.getElementById('result').innerText = "Kết quả: " + selectedName;
+        }, 5000);
+    }
+</script>
+
+</body>
 </html>
